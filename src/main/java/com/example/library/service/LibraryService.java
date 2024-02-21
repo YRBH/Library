@@ -24,9 +24,12 @@ public class LibraryService {
         if (user == null || book == null || !book.isActive() || user.getUserBookList().size() > 2) {
             return false;
         }
-        user.addBookToList(bookForConclusion);
-        book.setActive(false);
-
+        if (true) {
+            user.addBookToList(bookForConclusion);
+            bookService.getLibrary().remove(book);
+        } else {
+            return false;
+        }
         return true;
     }
 
@@ -41,9 +44,9 @@ public class LibraryService {
 
         for (int i = 0; i < user.getUserBookList().size(); i++) {
             if (user.getUserBookList().get(i).getId() == bookId){
-                user.getUserBookList().remove(book);
+                bookService.addBookToList(user.getUserBookList().get(i).getAuthor(),user.getUserBookList().get(i).getYear(),user.getUserBookList().get(i).getName());
                 user.getUserBookList().remove(bookForConclusion);
-                book.setActive(true);
+//                book.setActive(true);
             }else {
                 return false;
             }
