@@ -39,7 +39,7 @@ public class BookService {
                 library.get(i).setAuthor(author);
                 library.get(i).setYear(year);
                 library.get(i).setName(name);
-                conclusion(library,libraryForConclusion);
+                conclusion(libraryForConclusion);
                 return true;
             }
         }
@@ -58,23 +58,15 @@ public class BookService {
 
     public List<BookForConclusion> bookForConclusionsList() {
         List<BookForConclusion> books = new ArrayList<>();
-        conclusion(library, books);
+        conclusion( books);
         return books;
     }
 
 
-    public void conclusion(List<Book> books, List<BookForConclusion> bookForConclusions) {
-        booksList();
+    public void conclusion( List<BookForConclusion> bookForConclusions) {
 
-        for (Book book : books) {
-            boolean exists = false;
-            for (BookForConclusion conclusion : bookForConclusions) {
-                if (book.getId() == (conclusion.getId())) {
-                    exists = true;
-                    break;
-                }
-            }
-            if (!exists) {
+        for (Book book : library) {
+            if (book.isActive()) {
                 BookForConclusion conclusion = new BookForConclusion();
                 conclusion.setId(book.getId());
                 conclusion.setAuthor(book.getAuthor());
@@ -96,7 +88,7 @@ public class BookService {
     }
 
     public BookForConclusion getBookByIdForConclusion(int id) {
-        conclusion(library,libraryForConclusion);
+        conclusion(libraryForConclusion);
         for (int i = 0; i < libraryForConclusion.size(); i++) {
                 if (libraryForConclusion.get(i).getId() == id){
                     return libraryForConclusion.get(i);
@@ -107,7 +99,7 @@ public class BookService {
 
 
     public boolean deleteBookFromList(int id) {
-        conclusion(library,libraryForConclusion);
+        conclusion(libraryForConclusion);
         for (int i = 0; i < library.size(); i++) {
             for (int j = 0; j < libraryForConclusion.size(); j++) {
                 if (library.get(i).getId() == id && libraryForConclusion.get(j).getId() == id) {
