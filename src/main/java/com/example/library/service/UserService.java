@@ -19,8 +19,12 @@ public class UserService {
 
     private List<User> users = new ArrayList<>();
 
-    public boolean createUser(String name, String lastNAme){
-        User u1 = new User(name,lastNAme);
+    public boolean createUser(String name, String lastName){
+        User u1 = new User(name,lastName);
+
+        if (name.isEmpty() || lastName.isEmpty()){
+            return false;
+        }
         users.add(u1);
         return true;
     }
@@ -30,6 +34,9 @@ public class UserService {
     }
 
     public boolean changeUserInfo(int id, String name, String lastName) {
+        if (name.isEmpty() || lastName.isEmpty()){
+            return false;
+        }
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getId() == id) {
                 users.get(i).setUserName(name);

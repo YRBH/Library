@@ -20,6 +20,9 @@ public class UserController {
         System.out.println(map);
         String name = map.get("name");
         String lastName = map.get("lastname");
+        if (name.isEmpty() || lastName.isEmpty()){
+            return false;
+        }
          userService.createUser(name, lastName);
         return true;
     }
@@ -33,6 +36,9 @@ public class UserController {
     public boolean changeBookInfo(@PathVariable int id, @RequestBody Map<String,String> map) {
         String name = map.get("name");
         String lastName = map.get("lastname");
+        if (name.isEmpty() || lastName.isEmpty()){
+            return false;
+        }
         userService.changeUserInfo(id, name, lastName);
         return true;
     }
