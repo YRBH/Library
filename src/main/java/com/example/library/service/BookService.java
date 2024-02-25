@@ -65,6 +65,7 @@ public class BookService {
 
     public void conclusion(List<Book> books, List<BookForConclusion> bookForConclusions) {
         booksList();
+
         for (Book book : books) {
             boolean exists = false;
             for (BookForConclusion conclusion : bookForConclusions) {
