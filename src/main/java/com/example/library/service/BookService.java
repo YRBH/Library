@@ -27,6 +27,9 @@ public class BookService {
 
     public boolean addBookToList(String author, String year, String name) {
         Book b1 = new Book(author, year, name);
+        if (author.isEmpty() || year.isEmpty() || name.isEmpty()){
+            return false;
+        }
         library.add(b1);
         bookForConclusionsList();
         return true;
@@ -34,6 +37,9 @@ public class BookService {
 
 
     public boolean changeBookInfo(int id, String author, String year, String name) {
+        if (author.isEmpty() || year.isEmpty() || name.isEmpty()){
+            return false;
+        }
         for (int i = 0; i < library.size(); i++) {
             if (library.get(i).getId() == id) {
                 library.get(i).setAuthor(author);
@@ -44,16 +50,6 @@ public class BookService {
             }
         }
         return false;
-    }
-
-    public List<Book> booksList() {
-        List<Book> books = new ArrayList<>();
-        for (int i = 0; i < library.size(); i++) {
-            if (library.get(i).isActive()) {
-                books.add(library.get(i));
-            }
-        }
-        return books;
     }
 
     public List<BookForConclusion> bookForConclusionsList() {

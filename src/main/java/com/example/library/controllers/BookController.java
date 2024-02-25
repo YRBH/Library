@@ -18,10 +18,14 @@ public class BookController {
 
     @PostMapping("/book")
     public boolean createBook(@RequestBody Map<String, String> map) {
-        System.out.println(map);
+
         String author = map.get("author");
         String year = map.get("year");
         String name = map.get("name");
+
+        if (author.isEmpty() || year.isEmpty() || name.isEmpty()){
+            return false;
+        }
         bookService.addBookToList(author, year, name);
         return true;
     }
@@ -31,6 +35,13 @@ public class BookController {
         String author = map.get("author");
         String year = map.get("year");
         String name = map.get("name");
+
+        if (author.isEmpty() || year.isEmpty() || name.isEmpty()){
+            return false;
+        }
+//        if (!bookService.bookExists(id)) {
+//            return false;
+//        }
         bookService.changeBookInfo(id,author,year,name);
         return true;
     }
