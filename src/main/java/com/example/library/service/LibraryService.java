@@ -6,6 +6,10 @@ import com.example.library.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Map;
+
 
 @Service
 public class LibraryService {
@@ -39,11 +43,10 @@ public class LibraryService {
             return false;
         }
 
-        for (int i = 0; i < user.getUserBookList().size(); i++) {
-            if (user.getUserBookList().get(i).getId() == bookId) {
+        for(Map.Entry<LocalDate, BookForConclusion> entry: user.getUserBookList().entrySet()){
+            if(entry.getValue().getId()==bookId){
                 book.setActive(true);
-            }else {
-                return false;
+             user.getUserBookList().remove(entry.getKey());
             }
         }
         return true;

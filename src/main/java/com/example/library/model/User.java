@@ -1,7 +1,7 @@
 package com.example.library.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 public class User {
 
@@ -9,14 +9,15 @@ public class User {
     private int id;
     private String UserName;
     private String UserLastName;
+    private final LocalDate date = LocalDate.now();
 
-    private List<BookForConclusion> userBookList = new ArrayList<>();
+    private Map<LocalDate, BookForConclusion> userBookList = new HashMap<LocalDate, BookForConclusion>();
 
-    public List<BookForConclusion> getUserBookList() {
+    public Map<LocalDate, BookForConclusion> getUserBookList() {
         return userBookList;
     }
 
-    public void setUserBookList(List<BookForConclusion> userBookList) {
+    public void setUserBookList(Map<LocalDate, BookForConclusion> userBookList) {
         this.userBookList = userBookList;
     }
 
@@ -64,7 +65,7 @@ public class User {
     }
 
     public boolean addBookToList(BookForConclusion book){
-        userBookList.add(book);
+        userBookList.put(date,book);
         return true;
     }
 
