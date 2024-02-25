@@ -25,15 +25,6 @@ public class BookController {
         bookService.addBookToList(author, year, name);
         return true;
     }
-//    @PostMapping("/book")
-//    public boolean createBookWithDate(@RequestBody Map<String, String> map) {
-//        System.out.println(map);
-//        String author = map.get("author");
-//        String year = map.get("year");
-//        String name = map.get("name");
-//        bookService.addBookToListWithDate(author, year, name);
-//        return true;
-//    }
 
     @PostMapping("/book/{id}")
     public boolean changeBookInfo(@PathVariable int id,@RequestBody Map<String,String> map){
