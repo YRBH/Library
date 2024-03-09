@@ -20,35 +20,35 @@ public class LibraryService {
     UserService userService;
 
 
-    public boolean userTakeBook(int userId, int bookId) {
-        User user = userService.getUserById(userId);
-        Book book = bookService.getBookById(bookId);
-        BookForConclusion bookForConclusion = bookService.getBookByIdForConclusion(bookId);
+//    public boolean userTakeBook(int userId, int bookId) {
+//        User user = userService.getUserById(userId);
+//        Book book = bookService.getBookById(bookId);
+//        BookForConclusion bookForConclusion = bookService.getBookByIdForConclusion(bookId);
+//
+//        if (user == null || book == null || !book.isActive() || user.getUserBookList().size() > 2) {
+//            return false;
+//        }
+//
+//        user.addBookToList(bookForConclusion);
+//        book.setActive(false);
+//
+//        return true;
+//    }
 
-        if (user == null || book == null || !book.isActive() || user.getUserBookList().size() > 2) {
-            return false;
-        }
-
-        user.addBookToList(bookForConclusion);
-        book.setActive(false);
-
-        return true;
-    }
-
-    public boolean returnUserBook(int userId, int bookId){
-        User user = userService.getUserById(userId);
-        Book book = bookService.getBookById(bookId);
-
-        if (user == null){
-            return false;
-        }
-
-        for(Map.Entry<LocalDate, BookForConclusion> entry: user.getUserBookList().entrySet()){
-            if(entry.getValue().getId()==bookId){
-                book.setActive(true);
-             user.getUserBookList().remove(entry.getKey());
-            }
-        }
-        return true;
-    }
+//    public boolean returnUserBook(int userId, int bookId){
+//        User user = userService.getUserById(userId);
+//        Book book = bookService.getBookById(bookId);
+//
+//        if (user == null){
+//            return false;
+//        }
+//
+//        for(Map.Entry<LocalDate, BookForConclusion> entry: user.getUserBookList().entrySet()){
+//            if(entry.getValue().getId()==bookId){
+//                book.setActive(true);
+//             user.getUserBookList().remove(entry.getKey());
+//            }
+//        }
+//        return true;
+//    }
 }
