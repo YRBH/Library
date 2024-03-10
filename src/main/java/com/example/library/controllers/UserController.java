@@ -32,26 +32,26 @@ public class UserController {
     public List<User> showUsers() throws SQLException {
         return userService.viewUsers();
     }
-//
-//    @PostMapping("/user/{id}")
-//    public boolean changeBookInfo(@PathVariable int id, @RequestBody Map<String,String> map) {
-//        String name = map.get("name");
-//        String lastName = map.get("lastname");
-//        if (name.isEmpty() || lastName.isEmpty()){
-//            return false;
-//        }
-//        userService.changeUserInfo(id, name, lastName);
-//        return true;
-//    }
-//
-//    @DeleteMapping("/user/{id}")
-//    public boolean deleteUser(@PathVariable int id) {
-//        return userService.deleteUserFromList(id);
-//    }
-//
-//    @GetMapping("/user/{id}")
-//    public User showUserById(@PathVariable int id){
-//        return userService.getUserById(id);
-//    }
+
+    @PutMapping("/user/{id}")
+    public boolean changeUserInfo(@PathVariable int id, @RequestBody Map<String,String> map)  {
+        String name = map.get("userName");
+        String lastName = map.get("userLastName");
+        if (name.isEmpty() || lastName.isEmpty()){
+            return false;
+        }
+
+        userService.changeUserInfo(id, name, lastName);
+        return true;
+    }
+
+    @DeleteMapping("/user/{id}")
+    public boolean deleteUser(@PathVariable int id) {
+        return userService.deleteUserFromList(id);
+    }
+    @GetMapping("/user/{id}")
+    public User showUserById(@PathVariable int id) throws SQLException {
+        return userService.getUserById(id);
+    }
 
 }

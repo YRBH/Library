@@ -19,15 +19,15 @@ public class LibraryController {
     @Autowired
     BookService bookService;
 
-//    @PostMapping
-//    private boolean userGetBook(@RequestParam Integer id, @RequestBody Map<String, Integer> map){
-//        int idBook= map.get("book");
-//        return  libraryService.userTakeBook(id,idBook);
-//    }
-//
-//    @DeleteMapping
-//    private boolean userReturnBook(@RequestParam Integer id, @RequestBody Map<String, Integer> map){
-//        int idBook = map.get("book");
-//        return libraryService.returnUserBook(id,idBook);
-//    }
+    @PostMapping
+    private boolean userGetBook(@RequestParam Integer id, @RequestBody Map<String, Integer> map){
+        int idBook= map.get("book");
+        return  libraryService.userTakeBook(id,idBook);
+    }
+
+    @PutMapping
+    private boolean userReturnBook( @RequestBody Map<String, Integer> map){
+        int idBook = map.get("book");
+        return libraryService.returnUserBook(idBook);
+    }
 }
