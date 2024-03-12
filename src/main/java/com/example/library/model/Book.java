@@ -22,6 +22,10 @@ public class Book {
 
     private boolean isActive;
 
+    public Book() {
+
+    }
+
     public boolean isActive() {
         return isActive;
     }
@@ -50,6 +54,10 @@ public class Book {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAuthor() {

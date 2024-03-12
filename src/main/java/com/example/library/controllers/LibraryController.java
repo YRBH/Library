@@ -25,9 +25,9 @@ public class LibraryController {
         return  libraryService.userTakeBook(id,idBook);
     }
 
-    @DeleteMapping
-    private boolean userReturnBook(@RequestParam Integer id, @RequestBody Map<String, Integer> map){
+    @PutMapping
+    private boolean userReturnBook( @RequestBody Map<String, Integer> map){
         int idBook = map.get("book");
-        return libraryService.returnUserBook(id,idBook);
+        return libraryService.returnUserBook(idBook);
     }
 }
