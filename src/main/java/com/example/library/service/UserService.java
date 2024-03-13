@@ -35,16 +35,20 @@ public class UserService {
             return false;
         }
     }
+
     public List<User> viewUsers() throws SQLException {
         List<User> users = new ArrayList<>();
 
         Connection conn = null;
         Statement st = null;
+        Statement st2 = null;
         ResultSet rs = null;
+        ResultSet rs2 = null;
 
         try {
             conn = DriverManager.getConnection(url, username, password);
             st = conn.createStatement();
+            st2 = conn.createStatement();
             rs = st.executeQuery("SELECT * FROM user");
 
             while (rs.next()) {
@@ -53,8 +57,18 @@ public class UserService {
                 users1.setUserName(rs.getString("userName"));
                 users1.setUserLastName(rs.getString("userLastName"));
 
-                users.add(users1);
+                rs2 = st2.executeQuery("SELECT * FROM book WHERE user_id = " + users1.getId());
+                while (rs2.next()) {
+                    Book book = new Book();
+                    book.getId(rs2.getInt("id"));
+                    book.setAuthor(rs2.getString("author"));
+                    book.setYear(rs2.getString("year"));
+                    book.setName(rs2.getString("name"));
+                    book.setDate(rs2.getString("date"));
 
+                    users1.addBookToList(book);
+                }
+                users.add(users1);
             }
         } finally {
             if (rs != null) rs.close();
@@ -66,7 +80,7 @@ public class UserService {
     }
 
     public boolean changeUserInfo(int id, String name, String lastName) {
-        if (name.isEmpty() || lastName.isEmpty()){
+        if (name.isEmpty() || lastName.isEmpty()) {
             return false;
         }
 
@@ -74,12 +88,12 @@ public class UserService {
         PreparedStatement ps = null;
 
         try {
-        conn = DriverManager.getConnection(url,username,password);
-        String q = "UPDATE user SET username = ?, userLastName = ? WHERE id = ?";
+            conn = DriverManager.getConnection(url, username, password);
+            String q = "UPDATE user SET username = ?, userLastName = ? WHERE id = ?";
             ps = conn.prepareStatement(q);
-            ps.setString(1,name);
-            ps.setString(2,lastName);
-            ps.setInt(3,id);
+            ps.setString(1, name);
+            ps.setString(2, lastName);
+            ps.setInt(3, id);
 
             int rowsAffected = ps.executeUpdate();
             ps.close();
@@ -97,10 +111,10 @@ public class UserService {
         PreparedStatement ps = null;
 
         try {
-            conn = DriverManager.getConnection(url,username,password);
+            conn = DriverManager.getConnection(url, username, password);
             String q = "DELETE FROM user WHERE id = ?";
             ps = conn.prepareStatement(q);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
 
             int roweAddected = ps.executeUpdate();
             ps.close();
@@ -111,6 +125,7 @@ public class UserService {
         }
         return false;
     }
+
     public User getUserById(int id) throws SQLException {
         User user = null;
 

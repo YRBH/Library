@@ -9,6 +9,18 @@ public class User {
     private int id;
     private String userName;
 
+    private String userLastName;
+
+    private List<Book> userBooks = new ArrayList<>();
+
+    public List<Book> getUserBooks() {
+        return userBooks;
+    }
+
+    public void setUserBooks(List<Book> userBooks) {
+        this.userBooks = userBooks;
+    }
+
     public User() {
 
     }
@@ -17,18 +29,8 @@ public class User {
         this.id = id;
     }
 
-    private String userLastName;
+
     private final LocalDate date = LocalDate.now();
-
-    private Map<LocalDate, BookForConclusion> userBookList = new HashMap<LocalDate, BookForConclusion>();
-
-    public Map<LocalDate, BookForConclusion> getUserBookList() {
-        return userBookList;
-    }
-
-    public void setUserBookList(Map<LocalDate, BookForConclusion> userBookList) {
-        this.userBookList = userBookList;
-    }
 
     public User(String userName, String userLastName) {
         this.id = nextId++;
@@ -42,6 +44,7 @@ public class User {
                 "id=" + id +
                 ", UserName='" + userName + '\'' +
                 ", UserLastName='" + userLastName + '\'' +
+                userBooks +
                 '}';
     }
 
@@ -73,8 +76,8 @@ public class User {
         this.userLastName = userLastName;
     }
 
-    public boolean addBookToList(BookForConclusion book){
-        userBookList.put(date,book);
+    public boolean addBookToList(Book book){
+        userBooks.add(book);
         return true;
     }
 
