@@ -35,7 +35,7 @@ public class LibraryService {
 
         try {
             conn = DriverManager.getConnection(url,user,password);
-            String q = "UPDATE book SET user_id = ? WHERE id = ?";
+            String q = "UPDATE book SET user_id = ?, date = CURRENT_DATE WHERE id = ?";
             ps = conn.prepareStatement(q);
             ps.setString(1, String.valueOf(userId));
             ps.setString(2, String.valueOf(bookId));
@@ -56,7 +56,7 @@ public class LibraryService {
         PreparedStatement ps = null;
         try {
             conn = DriverManager.getConnection(url,user,password);
-            String q = "UPDATE book SET user_id = null WHERE id = ?";
+            String q = "UPDATE book SET user_id = null, date = null WHERE id = ?";
             ps = conn.prepareStatement(q);
             ps.setString(1, String.valueOf(bookId));
 

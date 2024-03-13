@@ -1,17 +1,6 @@
 package com.example.library.model;
 
-import java.sql.Date;
-
 public class Book {
-//    private Date addedDate;
-
-//    public Date getAddedDate() {
-//        return addedDate;
-//    }
-//
-//    public void setAddedDate(Date addedDate) {
-//        this.addedDate = addedDate;
-//    }
 
     private static int nextId =1;
     private int id;
@@ -20,26 +9,26 @@ public class Book {
     private String year;
     private String name;
 
-    private boolean isActive;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public Book() {
 
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
 
     public Book(String author, String year, String name) {
         this.id = nextId++;
         this.author = author;
         this.year = year;
         this.name = name;
-        this.isActive = true;
     }
 
     @Override
@@ -52,8 +41,8 @@ public class Book {
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getId(int id) {
+        return this.id;
     }
 
     public void setId(int id) {
